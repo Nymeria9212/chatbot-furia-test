@@ -15,7 +15,8 @@ def set_commands():
         {"command": "jogos", "description": "Últimos resultados"},
         {"command": "quiz", "description": "Responder quiz"},
         {"command": "live", "description": "Status de jogo ao vivo"},
-        {"command": "whatsapp", "description": "Contato inteligente da FURIA"}
+        {"command": "whatsapp", "description": "Contato inteligente da FURIA"},
+        {"command": "comunidade", "description": "Comunidade FURIA"}
     ]
     requests.post(
         f"https://api.telegram.org/bot{TOKEN}/setMyCommands",
@@ -45,8 +46,11 @@ def webhook():
     elif text == '/live':
         reply = "🕐 Agora: FURIA x Vitality | MAPA 1 - 10x7 (em andamento)\n🔗 Acompanhe ao vivo: https://twitch.tv/furia"
 
-    elif text == 'whatsapp':
+    elif text == '/whatsapp':
         reply = "Você pode falar com o Contato Inteligente da FURIA (closed beta) pelo WhatsApp:\n👉 https://wa.me/5511993404466"
+
+    elif text == "/comunidade":
+        reply = "Participe da comunidade do Discord da FURIA em:\n https://discord.com/invite/furia"    
 
     elif text == '/quiz':
         reply = "🏆 Qual foi o primeiro campeonato que a FURIA ganhou?\n(a) CBCS\n(b) ESL Brasil\n(c) DreamHack"
@@ -58,10 +62,10 @@ def webhook():
             reply = "❌ Resposta errada! A resposta certa é (c) DreamHack."
 
     elif text == 'oi':
-        reply = "Salve, fã da FURIA! 😎🔥"
+        reply = "Salve, fã da FURIA! 😎🔥\n Para interagir acesse mais opções no menu logo abaixo 👇"
 
     else:
-        reply = f"Você disse: {text}"
+        reply = f"Você disse: {text}. Desculpe, mas não entendi. Que tal usar uma das opções do menu logo abaixo? 👇"
 
     # Envia a resposta pro Telegram
     requests.post(TELEGRAM_API_URL, json={
