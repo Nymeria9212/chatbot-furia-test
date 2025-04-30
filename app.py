@@ -8,32 +8,32 @@ app = Flask(__name__)
 TOKEN = '8000016573:AAFEqkOwh279clP3m5PwfyiW-xQO_5BOHSc'
 TELEGRAM_API_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 
+# Função para definir os comandos do menu
+def set_commands():
+    commands = [
+        {"command": "elenco", "description": "Ver elenco atual"},
+        {"command": "jogos", "description": "Últimos resultados"},
+        {"command": "quiz", "description": "Responder quiz"},
+        {"command": "live", "description": "Status de jogo ao vivo"},
+        {"command": "whatsapp", "description": "Contato inteligente da FURIA"}
+    ]
+    requests.post(
+        f"https://api.telegram.org/bot{TOKEN}/setMyCommands",
+        json={"commands": commands}
+    )
+
+# Define os comandos ao iniciar o bot
+set_commands()
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
     chat_id = data['message']['chat']['id']
     text = data['message'].get('text', '').lower()
 
-    # Menu com botões ao iniciar
+    # Menu inicial
     if text == '/start':
-        reply = "Fala, fã da FURIA! 🐾 Escolha uma opção no menu ou mande uma mensagem!"
-
-        keyboard = {
-            "keyboard": [
-                [{"text": "/elenco"}, {"text": "/jogos"}],
-                [{"text": "/quiz"}, {"text": "/live"}],
-                [{"text": "whatsapp"}]
-            ],
-            "resize_keyboard": True,
-            "one_time_keyboard": False
-        }
-
-        requests.post(TELEGRAM_API_URL, json={
-            'chat_id': chat_id,
-            'text': reply,
-            'reply_markup': keyboard
-        })
-        return 'ok'
+        reply = "Fala, fã da FURIA! 🐾 Use os comandos abaixo para interagir:\n/elenco\n/jogos\n/quiz\n/live\n/whatsapp"
 
     # Comandos específicos
     elif text == '/elenco':
@@ -59,9 +59,6 @@ def webhook():
 
     elif text == 'oi':
         reply = "Salve, fã da FURIA! 😎🔥"
-
-    elif 'vamos' in text or 'furia' in text:
-        reply = "HEADSHOT de responsa! Vamooo FURIA! 🔫🐾"
 
     else:
         reply = f"Você disse: {text}"
