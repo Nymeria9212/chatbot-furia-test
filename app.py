@@ -61,7 +61,7 @@ def webhook():
         reply = "Salve, fã da FURIA! 😎🔥"
 
     elif 'vamos' in text or 'furia' in text:
-    reply = "HEADSHOT de responsa! Vamooo FURIA! 🔫🐾"
+        reply = "HEADSHOT de responsa! Vamooo FURIA! 🔫🐾"
 
     else:
         reply = f"Você disse: {text}"
