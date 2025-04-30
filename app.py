@@ -34,7 +34,7 @@ def webhook():
 
     # Menu inicial
     if text == '/start':
-        reply = "Fala, fã da FURIA! 🐾 Use os comandos abaixo para interagir:\n/elenco\n/jogos\n/quiz\n/live\n/whatsapp"
+        reply = "Fala, fã da FURIA! 🐾 Use os comandos do menu abaixo para interagir 👇"
 
     # Comandos específicos
     elif text == '/elenco':
