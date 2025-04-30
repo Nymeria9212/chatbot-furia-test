@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Token do BotFather
-TOKEN = '8000016573:AAFEqkOwh279clP3m5PwfyiW-xQO_5BOHSc'
+TOKEN = os.environ.get('BOT_TOKEN')
 TELEGRAM_API_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 
 # Função para definir os comandos do menu
